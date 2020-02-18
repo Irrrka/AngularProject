@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-authenticated.component.css']
 })
 export class HomeAuthenticatedComponent implements OnInit {
+  //TODO
   recipes: Object
   creatorId: string;
   currentUserId: string;
@@ -43,20 +44,20 @@ export class HomeAuthenticatedComponent implements OnInit {
   //     this.router.navigate(['/userProfileDetails', creatorId])
   //   }
   // }
-  deleteListing(id) {
-    this.recipeService.delete(id)
-      .subscribe(
-        data => {
-          console.log(data)
-          this.router.navigate(['/home'])
-        },
-        err => {
-          console.log(err)
-        }
-      )
-  }
-  editListing(id) {
-    this.router.navigate(['/editListing', id])
-  }
+  // deleteListing(id) {
+  //   this.recipeService.delete(id)
+  //     .subscribe(
+  //       data => {
+  //         console.log(data)
+  //         this.router.navigate(['/home'])
+  //       },
+  //       err => {
+  //         console.log(err)
+  //       }
+  //     )
+  // }
+  // editListing(id) {
+  //   this.router.navigate(['/editListing', id])
+  // }
 
 }

@@ -17,35 +17,38 @@
 
 <div id="sharedRecipes">
     <div class="container">
+        <div *ngFor="let recipe of recipes">
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="our-team-main">
 
                     <div class="team-front">
-                        <img src={{categoryImageURL}} />
-                        <h3>{{meal}}</h3>
+                        <img [src]="recipe.categoryImageUrl" />
+                        <h3>{{recipe.meal}}</h3>
                         <p>{{category}}</p>
                     </div>
 
                     <div class="team-back">
                         <div class="back-side-info">
-                            <h4>Ingredients</h4>
+                          <h4>Ingredients</h4>
+                            <div *ngFor="let ingredient of recipe.ingredients">
                             <ul>
-                                {{#each ingredients}}
-                                    <li>{{this}}</li>      
-                                {{/each}}
+                                    <li>{{ingredient}}</li>      
                             </ul>
+                            </div>
                             <a href="/recipies/{{_id}}">View the recepie</a>
                         </div>
 
                         <img class="foodImage"
-                            src={{foodImageURL}} />
+                            [src]="recipe.foodImageUrl"  />
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div *ngIf="recipes?.length === 0">
