@@ -1,0 +1,19 @@
+<div id="listings">
+  <div *ngFor="let car of carsData" class="listing">
+    <h4>{{car.brand}} {{car.model}}</h4>
+    <img src="{{car.imageUrl}}" alt="carImage">
+    <p id="title">{{car.title}}</p>
+    <p><span>Year:</span>{{car.year}}&nbsp;&nbsp;&nbsp;<span>Fuel:</span> {{car.fuelType}}</p>
+    <p><span>Price:</span> {{car.price}} $</p>
+    <hr/>
+    <button type="submit" class="cartube-button" (click)="listingDetails(car._id)">Details</button>
+    <button type="submit" class="cartube-button" (click)="listingCreator(car._acl.creator)">Created by {{car.seller}}</button>
+    <div *ngIf="car._acl.creator === currentUserId || authService.isAdmin()">
+      <button type="submit" class="cartube-button" (click)="deleteListing(car._id)">Delete</button>
+      <button type="submit" class="cartube-button" (click)="editListing(car._id)">Edit</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="carsData?.length === 0" id="listings">
+  <h1>No Listings Found!</h1>
+</div>

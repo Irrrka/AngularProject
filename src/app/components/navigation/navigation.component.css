@@ -1,0 +1,13 @@
+#avatar-nav {
+    height: 70px;
+    width: 89px;
+    border-radius: 50%;
+}
+
+.nav-item {
+    cursor: pointer;
+}
+
+#profile {
+    float: right;
+}

@@ -1,0 +1,35 @@
+/* @font-face {
+    font-family: League-Gothic;
+    src: url(LeagueGothic-Regular.otf);
+} */
+
+#nav-icon {
+    width: 60%;
+    height: 6%;
+    display: block;
+    margin: auto;
+}
+
+/* .main-unlogged {
+    font-family: League-Gothic;
+} */
+
+#intro-para {
+    text-align: center;
+    font-size: 4vw;
+}
+
+.main-unlogged>img {
+    display: block;
+    margin: auto;
+    height: 450px;
+    /* Animation onload */
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+}
+
+
+
