@@ -19,17 +19,16 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router) {
-    this.model = new RegisterModel('', '', '', '', 18)
+    this.model = new RegisterModel('', '')
   }
 
+  //Refactor
   form = new FormGroup({
     "username": new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]),
     "password": new FormControl('', [Validators.required,
-    new CustomValidators().mustMatch('confirmPassword'), Validators.pattern('[a-zA-Z0-9]+')]),
+                                    new CustomValidators().mustMatch('confirmPassword'), 
+                                    Validators.pattern('[a-zA-Z0-9]+')]),
     "confirmPassword": new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z0-9]+')]),
-    "avatarUrl": new FormControl('', [Validators.required]),
-    "email": new FormControl('', [Validators.required, Validators.email]),
-    "age": new FormControl('', [Validators.required]),
   })
 
   get diagnostics() {
@@ -39,10 +38,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-
-
   register() {
-    delete this.model['confirmPassword'];
+    //delete this.model['confirmPassword'];
     this.authService.register(this.model)
       .subscribe(
         data => {

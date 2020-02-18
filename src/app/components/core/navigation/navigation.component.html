@@ -1,0 +1,27 @@
+<header class="masthead mb-auto">
+  <div class="inner">
+      <h3 class="masthead-brand">CookUni</h3>
+      <nav class="nav nav-masthead justify-content-center">
+
+        <div class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </div>
+          <div *ngIf="authService.checkIfLogged()" class="nav-item">
+            <a class="nav-link" routerLink="/profile">Welcome, {{username}}!</a>
+          </div>
+          <div *ngIf="authService.checkIfLogged()" class="nav-item">
+            <a class="nav-link" routerLink="/share">Share recipe</a>
+          </div>
+          <div *ngIf="authService.checkIfLogged()" class="nav-item">
+            <a class="nav-link" (click)="logout()">Sign off</a>
+          </div>
+          <div *ngIf="!authService.checkIfLogged()" class="nav-item">
+            <a class="nav-link" routerLink="/login">Sigh In</a>
+          </div>
+          <div *ngIf="!authService.checkIfLogged()" class="nav-item">
+            <a class="nav-link" routerLink="/register">Sign Up</a>
+          </div>
+       
+      </nav>
+  </div>
+</header>

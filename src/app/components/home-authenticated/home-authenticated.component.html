@@ -1,9 +1,9 @@
-<div id="listings">
-  <div *ngFor="let car of carsData" class="listing">
-    <h4>{{car.brand}} {{car.model}}</h4>
-    <img src="{{car.imageUrl}}" alt="carImage">
-    <p id="title">{{car.title}}</p>
-    <p><span>Year:</span>{{car.year}}&nbsp;&nbsp;&nbsp;<span>Fuel:</span> {{car.fuelType}}</p>
+<!--<div class="container">
+  <div *ngFor="let recipe of recipes">
+    <h4>{{recipe.brand}} {{recipe.model}}</h4>
+    <img src="{{recipe.imageUrl}}" alt="carImage">
+    <p id="title">{{recipe.title}}</p>
+    <p><span>Year:</span>{{recipe.year}}&nbsp;&nbsp;&nbsp;<span>Fuel:</span> {{car.fuelType}}</p>
     <p><span>Price:</span> {{car.price}} $</p>
     <hr/>
     <button type="submit" class="cartube-button" (click)="listingDetails(car._id)">Details</button>
@@ -13,7 +13,44 @@
       <button type="submit" class="cartube-button" (click)="editListing(car._id)">Edit</button>
     </div>
   </div>
+</div>-->
+
+<div id="sharedRecipes">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="our-team-main">
+
+                    <div class="team-front">
+                        <img src={{categoryImageURL}} />
+                        <h3>{{meal}}</h3>
+                        <p>{{category}}</p>
+                    </div>
+
+                    <div class="team-back">
+                        <div class="back-side-info">
+                            <h4>Ingredients</h4>
+                            <ul>
+                                {{#each ingredients}}
+                                    <li>{{this}}</li>      
+                                {{/each}}
+                            </ul>
+                            <a href="/recipies/{{_id}}">View the recepie</a>
+                        </div>
+
+                        <img class="foodImage"
+                            src={{foodImageURL}} />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div *ngIf="carsData?.length === 0" id="listings">
-  <h1>No Listings Found!</h1>
+
+<div *ngIf="recipes?.length === 0">
+    <div id='foodNotFound'>
+        <img src="https://t4.ftcdn.net/jpg/00/62/17/31/240_F_62173114_ozantkVtkPgzL0fxssAkTqKX1FHPr0UW.jpg" />
+        <h3>Food not found...</h3>
+    </div>
 </div>

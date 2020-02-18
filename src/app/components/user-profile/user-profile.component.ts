@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { UserService } from '../../services/user.service';
-import { ListingService } from '../../services/listing.service';
+import { RecipeService } from '../../services/recipe.service';
 import { AuthService } from '../authentication/auth.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private listingService: ListingService,
+    private recipeService: RecipeService,
     private userService: UserService,
     private authService: AuthService
   ) { }
@@ -31,7 +31,8 @@ export class UserProfileComponent implements OnInit {
       .subscribe(data => {
         this.userData = data;
         console.log(this.userData)
-        this.listingService.getUserListings(this.userData['username'])
+        //check
+        this.recipeService.getRecipe(this.userData['username'])
           .subscribe(
             data => {
               this.carsData = data;

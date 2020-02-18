@@ -1,12 +1,12 @@
 <div class="container">
-  <h1>Login Form</h1>
-  <form [formGroup]="form" (ngSubmit)="login()">
+  <form class="text-center p-5 form-layout" [formGroup]="form" (ngSubmit)="login()">
+    <p class="h4 mb-4">Sign in</p>
+
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" class="form-control" formControlName="username" [(ngModel)]="model.username" required>
       <div *ngIf="f.username.touched && f.username.dirty">
         <div class="alert alert-danger" *ngIf="f.username.errors?.required">Form is required</div>
-        <div class="alert alert-danger" *ngIf="f.username.errors?.pattern">Username must contain only Alphanumerical Chars</div>
       </div>
     </div>
 
@@ -15,12 +15,13 @@
       <label for="password">Password</label>
       <input type="password" class="form-control" formControlName="password" [(ngModel)]="model.password" required>
       <div *ngIf="f.password.touched && f.password.dirty">
-          <div class="alert alert-danger" *ngIf="f.password.errors?.minlength">Password must be at least 4 symbols</div>
-        </div>
+      </div>
     </div>
-    <button type="submit" class="cartube-button">Login</button>
-  </form>
 
+    <hr>
+
+    <button class="btn btn-danger w-25 m-auto my-4 btn-block" type="submit">Sign in</button>
+  </form>
   <div *ngIf="loginFailed" class="alert alert-danger">
     {{errMessage}}
   </div>

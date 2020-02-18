@@ -14,8 +14,6 @@ const logoutUrl = `https://baas.kinvey.com/user/${appKey}/_logout`;
 @Injectable()
 export class AuthService {
     private currentAuthtoken: string;
-    private checkIfAdmin: string;
-
 
     constructor(private http: HttpClient) {
 
@@ -40,14 +38,6 @@ export class AuthService {
     checkIfLogged() {
         return this.currentAuthtoken === localStorage.getItem('authtoken');
     }
-
-    isAdmin() {
-        if (localStorage.getItem('isAdmin') === 'true') {
-            return true
-        }
-        return false
-    }
-   
 
     get authToken() {
         return this.currentAuthtoken;

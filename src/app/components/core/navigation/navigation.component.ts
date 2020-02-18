@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../authentication/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../authentication/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  private checkIfAdmin: string;
 
   constructor(
     private authService: AuthService,
@@ -18,8 +17,8 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
   
   }
-  get avatar() {
-    return localStorage.getItem('avatarUrl')
+  get username() {
+    return localStorage.getItem('username')
   }
 
 

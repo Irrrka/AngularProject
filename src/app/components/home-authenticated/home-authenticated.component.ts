@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListingService } from '../../services/listing.service';
+import { RecipeService } from '../../services/recipe.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../components/authentication/auth.service';
 import { Router } from '@angular/router';
@@ -10,21 +10,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-authenticated.component.css']
 })
 export class HomeAuthenticatedComponent implements OnInit {
-  carsData: Object
+  recipes: Object
   creatorId: string;
   currentUserId: string;
 
   constructor(
-    private listingService: ListingService,
+    private recipeService: RecipeService,
     private authService: AuthService,
     private userService: UserService,
     private router: Router) { }
 
   ngOnInit() {
-    this.listingService.getAllListings()
+    this.recipeService.getAllRecipes()
       .subscribe(
         data => {
-          this.carsData = data;
+          this.recipes = data;
           this.currentUserId = localStorage.getItem('_id');
         },
         err => {
@@ -32,24 +32,23 @@ export class HomeAuthenticatedComponent implements OnInit {
         })
   }
 
-  listingDetails(id) {
-    this.router.navigate(['/listingDetails', id])
+  recipeInfo(id) {
+    //this.router.navigate(['/listingDetails', id])
   }
 
-  listingCreator(creatorId) {
-    if (creatorId === localStorage.getItem('_id')) {
-      console.log('yeah')
-      this.router.navigate(['/userPanel'])
-    } else {
-      this.router.navigate(['/userProfileDetails', creatorId])
-    }
-  }
+  // listingCreator(creatorId) {
+  //   if (creatorId === localStorage.getItem('_id')) {
+  //     this.router.navigate(['/userPanel'])
+  //   } else {
+  //     this.router.navigate(['/userProfileDetails', creatorId])
+  //   }
+  // }
   deleteListing(id) {
-    this.listingService.deleteListing(id)
+    this.recipeService.delete(id)
       .subscribe(
         data => {
           console.log(data)
-          this.router.navigate(['/listingDeleted'])
+          this.router.navigate(['/home'])
         },
         err => {
           console.log(err)

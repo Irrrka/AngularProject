@@ -6,7 +6,8 @@ import { AppRoutingModule } from './app-routing';
 
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
+import { NavigationComponent } from './components/core/navigation/navigation.component';
+import { FooterComponent } from './components/core/footer/footer.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,33 +18,34 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 
 import { AuthService } from './components/authentication/auth.service';
 import { UserService } from './services/user.service';
-import { ListingService } from './services/listing.service';
+import { RecipeService } from './services/recipe.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { CoreModule } from './components/core/core.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    NavigationComponent,
+    FooterComponent,
     UserPanelComponent,
     PageNotFoundComponent,
     HomeAuthenticatedComponent,
-    UserProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     AuthService,
     UserService,
-    ListingService,
+    RecipeService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
