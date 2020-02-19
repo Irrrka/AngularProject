@@ -3,6 +3,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../components/authentication/auth.service';
 import { Router } from '@angular/router';
+import { IRecipe } from 'src/app/interfaces/recipe';
 
 @Component({
   selector: 'app-home-authenticated',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HomeAuthenticatedComponent implements OnInit {
   //TODO
-  recipes: Object
+  recipes: IRecipe[]
   creatorId: string;
   currentUserId: string;
 
@@ -25,7 +26,7 @@ export class HomeAuthenticatedComponent implements OnInit {
     this.recipeService.getAllRecipes()
       .subscribe(
         data => {
-          this.recipes = data;
+          console.log(data)
           this.currentUserId = localStorage.getItem('_id');
         },
         err => {

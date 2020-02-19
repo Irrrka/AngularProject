@@ -1,0 +1,29 @@
+<form class="text-center p-5 form-layout" id="share-receipt-form" [formGroup]="form" (submit)="share()">
+    <p class="h4 mb-4">Share Recipe</p>
+
+    <label for="meal">Meal</label>
+    <input type="text" id="defaultRecepieShareMeal" formControlName="meal" class="form-control mb-4" placeholder="Meal">
+    <!-- <label for="ingredients">Ingredients</label>
+    <input type="text" id="defaultRecepieShareIngredients" formControlName="ingredients" class="form-control mb-4"
+        placeholder="Ingredients"> -->
+    <label for="prepMethod">Method of preparation</label>
+    <textarea type="text" id="defaultRecepieShareMethodOfPreparation" formControlName="prepMethod" class="form-control mb-4"
+        placeholder="Method of preparation"></textarea>
+    <label for="description">Description</label>
+    <textarea type="text" id="defaultRecepieShareDescription" formControlName="description" class="form-control mb-4"
+        placeholder="Description"></textarea>
+    <label for="foodImageURL">Image</label>
+    <input type="text" id="defaultRecepieShareFoodImageURL" formControlName="foodImageURL" class="form-control mb-4"
+        placeholder="Food Image URL...">
+    <!-- <label for="category">Category</label>
+    <select name="category">
+        <option selected>Select category...</option>
+        <option>Vegetables and legumes/beans</option>
+        <option>Fruits</option>
+        <option>Grain Food</option>
+        <option>Milk, cheese, eggs and alternatives</option>
+        <option>Lean meats and poultry, fish and alternatives</option>
+    </select> -->
+
+    <button class="btn btn-danger w-25 m-auto my-4 btn-block" type="submit">Share it</button>
+</form>

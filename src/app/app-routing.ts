@@ -4,18 +4,22 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
-import { UserPanelComponent } from './components/user-panel/user-panel.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeAuthenticatedComponent } from './components/home-authenticated/home-authenticated.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { CreateComponent } from './components/recipe/create/create.component';
+import { DetailsComponent } from './components/recipe/details/details.component';
+import { EditComponent } from './components/recipe/edit/edit.component';
+import { AllComponent } from './components/recipe/all/all.component';
 
 const routes: Routes = [
-    { path: 'home', component: HomeAuthenticatedComponent, canActivate: [AuthGuard] },
-    { path: 'welcome', component: HomeComponent, },
-    { path: 'login', component: LoginComponent, },
-    { path: 'register', component: RegisterComponent, },
-    { path: 'userPanel', component: UserPanelComponent, canActivate: [AuthGuard] },
     { path: '', pathMatch: 'full', redirectTo: 'home' },
+    //{ path: 'home', component: HomeAuthenticatedComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: HomeComponent },
+    { path: 'signin', component: LoginComponent, },
+    { path: 'signup', component: RegisterComponent, },
+    { path: 'recipes/share', component: CreateComponent, },
+    { path: 'recipes/:id', component: DetailsComponent, },
+    { path: 'recipes/all', component: AllComponent, },
     { path: '**', component: PageNotFoundComponent }
 
 ]

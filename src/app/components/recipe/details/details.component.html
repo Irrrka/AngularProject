@@ -1,0 +1,31 @@
+<div class="row form-layout p-5">
+    <div class="col-md-12">
+        <div class="recepieInfo">
+            <div class="detailsFoodImage">
+                <img [src]="recipe.foodImageURL"
+                    alt="">
+            </div>
+            <div class="infoPack">
+                <h3 class="my-3">{{recipe.meal}}</h3>
+                <p class="prep-method">{{recipe.prepMethod}}</p>
+                <p class="description">{{recipe.description}}</p>
+            </div>
+            <div class="actions">
+                <!-- {{#if isCreator}} -->
+                <a class="btn btn-danger" (click)="archive(recipe._id)">Archive</a>
+                <a class="btn btn-info" routerLink="/edit/{{recipe._id}}">Edit</a>
+                <!-- <a class="btn btn-success" routerLink="/like/{{recipe._id}}"> {{recipe.likesCounter}} likes</a> -->
+                <!-- {{else}}
+                {{/if}} -->
+            </div>
+        </div>
+        <h3 class="my-3 ingredient">Ingredients</h3>
+            <div class="detailsIngredients" *ngFor="let ingredient of recipe.ingredients">
+            <ul>
+                <!-- {{#each recipe.ingredients}} -->
+                <li>{{ingredient}}</li>
+               <!--  {{/each}} -->
+            </ul>
+        </div>
+    </div>
+</div>

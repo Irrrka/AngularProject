@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
-import { RegisterModel } from "../../models/register.model";
-import { LoginModel } from "../../models/login.model";
+import { IUser } from "../../interfaces/user";
 
 
 const appKey = "kid_BJdp2d8aB" // APP KEY HERE;
@@ -19,12 +18,12 @@ export class AuthService {
 
     }
 
-    login(model: LoginModel) {
+    login(model: IUser) {
         return this.http.post(loginUrl,
             JSON.stringify(model));
     }
 
-    register(model: RegisterModel) {
+    register(model: IUser) {
         return this.http.post(registerUrl,
             JSON.stringify(model));
 
@@ -40,11 +39,11 @@ export class AuthService {
     }
 
     get authToken() {
-        return this.currentAuthtoken;
+        return localStorage.getItem('authtoken');
     }
 
     set authToken(value: string) {
-        this.currentAuthtoken = value;
+        this.currentAuthtoken = localStorage.getItem('authtoken');
     }
 
 }
