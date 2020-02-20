@@ -1,5 +1,4 @@
-<div class="row form-layout p-5">
-  <div class="col-md-12">
+<div class=" form-layout p-5">
       <div class="recepieInfo">
           <div class="detailsFoodImage">
               <img src={{recipe.foodImageURL}} alt="foodImageURL">
@@ -12,11 +11,9 @@
       </div>
       <h3 class="my-3 ingredient">Ingredients</h3>
           <div class="detailsIngredients">
-          <ul>
               <!-- {{#each recipe.ingredients}} -->
               <li>{{recipe.ingredients}}</li>
              <!--  {{/each}} -->
-          </ul>
       </div>
       <div class="actions">
           <div *ngIf="isCreator" class="nav-item">
@@ -28,4 +25,3 @@
             {{/if}} -->
         </div>
   </div>
-</div>

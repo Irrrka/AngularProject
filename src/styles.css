@@ -226,12 +226,12 @@ form textarea {
 
 .detailsFoodImage {
   display: inline-block;
-  width: 69%;
+  width: 70%;
   margin-right: 1%;
 }
 
 .detailsFoodImage img {
-  width: 350px;
+  width: 100%;
   height: auto;
   border: 1px solid white;
 }

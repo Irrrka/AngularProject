@@ -43,6 +43,7 @@ export class DetailsComponent implements OnInit {
             data['category'],
             data['categoryImageURL'],
           )
+          //this.recipe.ingredients
           console.log(this.recipe)
         },
         err => {
