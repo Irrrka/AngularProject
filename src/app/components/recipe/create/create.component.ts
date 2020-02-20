@@ -27,7 +27,7 @@ export class CreateComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private router: Router) {
-    this.model = new RecipeModel('', '', '', '', '', '', '')
+    this.model = new RecipeModel('', '', '', '', '', '')
   }
 
   form = new FormGroup({

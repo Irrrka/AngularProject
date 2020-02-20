@@ -2,31 +2,30 @@
   <div class="col-md-12">
       <div class="recepieInfo">
           <div class="detailsFoodImage">
-              <img [src]="recipe"
-                  alt="">
+              <img src={{recipe.foodImageURL}} alt="foodImageURL">
           </div>
           <div class="infoPack">
-              <h3 class="my-3">{{recipe.valueOf('meal')}}</h3>
-              <p class="prep-method"></p>
-              <p class="description"></p>
+          <h3 class="my-3">{{recipe.meal}}</h3>
+          <p class="prep-method">{{recipe.prepMethod}}</p>
           </div>
-          <div class="actions">
-            <div *ngIf="isCreator" class="nav-item">
-              <a class="btn btn-danger" (click)="archive()">Archive</a>
-              <a class="btn btn-info" (click)="edit()">Edit</a>
-            </div>
-              <!-- <a class="btn btn-success" routerLink="/like/{{recipe._id}}"> {{recipe.likesCounter}} likes</a> -->
-              <!-- {{else}}
-              {{/if}} -->
-          </div>
+          
       </div>
       <h3 class="my-3 ingredient">Ingredients</h3>
-          <div class="detailsIngredients" *ngFor="let ingredient of recipe">
+          <div class="detailsIngredients">
           <ul>
               <!-- {{#each recipe.ingredients}} -->
-              <li>{{ingredient}}</li>
+              <li>{{recipe.ingredients}}</li>
              <!--  {{/each}} -->
           </ul>
       </div>
+      <div class="actions">
+          <div *ngIf="isCreator" class="nav-item">
+            <a class="btn btn-danger" (click)="archive()">Archive</a>
+            <a class="btn btn-info" (click)="edit()">Edit</a>
+          </div>
+            <!-- <a class="btn btn-success" routerLink="/like/{{recipe._id}}"> {{recipe.likesCounter}} likes</a> -->
+            <!-- {{else}}
+            {{/if}} -->
+        </div>
   </div>
 </div>

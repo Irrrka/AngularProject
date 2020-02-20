@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from '../../../services/recipe.service';
 import { AuthService } from '../../authentication/auth.service';
+import { RecipeModel } from '../../../models/recipe.model';
+import { RecipeModule } from '../recipe.module';
 
 @Component({
   selector: 'app-details',
@@ -11,7 +13,7 @@ import { AuthService } from '../../authentication/auth.service';
 
 export class DetailsComponent implements OnInit {
   id: string;
-  recipe: Object;
+  recipe: RecipeModel;
   creatorId: string;
   isCreator: boolean;
 
@@ -24,22 +26,31 @@ export class DetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params['id'] 
-    });
     this.creatorId = localStorage.getItem('_id');
- 
-   
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    
     this.recipeService.getRecipe(this.id)
-      .subscribe(
-        data => {
-          this.isCreator = localStorage.getItem('_id') === data['_acl']['creator'];
-          this.recipe = data;
+    .subscribe(
+      data => {
+          this.isCreator = this.creatorId === data['_acl']['creator'];
+          this.recipe = new RecipeModel(
+            data['meal'],
+            data['ingredients'],
+            data['prepMethod'],
+            data['foodImageURL'],
+            data['category'],
+            data['categoryImageURL'],
+          )
+          console.log(this.recipe)
         },
         err => {
           console.log(err)
         }
       )
+   
+   
   }
 
   archive() {
@@ -55,7 +66,7 @@ export class DetailsComponent implements OnInit {
       )
   }
   edit(id) {
-    this.router.navigate([`/recipe/${id}/edit/`, id])
+    this.router.navigate([`/recipes/${id}/edit/`])
   }
 
 

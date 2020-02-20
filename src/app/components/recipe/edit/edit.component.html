@@ -1,29 +1,76 @@
-
-<form class="text-center p-5 form-layout" [formGroup]="form" (submit)="edit()" id="edit-receipt-form" >
-  <p class="h4 mb-4">Edit Recipe</p>
-
-  <input type="text" id="defaultRecepieEditMeal" formControlName="meal" class="form-control mb-4" placeholder="Meal" value="{{recipe.meal}}">
-
-  <input type="text" id="defaultRecepieEditIngredients" formControlName="ingredients" class="form-control mb-4"
-    placeholder="Ingredients" value="{{recipe.ingredients}}">
-
-  <textarea type="text" id="defaultRecepieEditMethodOfPreparation" formControlName="prepMethod" class="form-control mb-4"
-    placeholder="Method of preparation">{{recipe.prepMethod}}</textarea>
-
-  <textarea type="text" id="defaultRecepieEditDescription" formControlName="description" class="form-control mb-4"
-    placeholder="Description">{{recipe.description}}</textarea>
-
-  <input type="text" id="defaultRecepieEditFoodImageURL" formControlName="foodImageURL" class="form-control mb-4"
-    placeholder="Food Image URL..." value="{{recipe.foodImageURL}}">
-
-  <select formControlName="category" value="{{recipe.category}}">
-    <option selected>Select category...</option>
-    <option>Vegetables and legumes/beans</option>
-    <option>Fruits</option>
-    <option>Grain Food</option>
-    <option>Milk, cheese, eggs and alternatives</option>
-    <option>Lean meats and poultry, fish and alternatives</option>
-  </select>
-  <button class="btn btn-danger w-25 m-auto my-4 btn-block" type="submit">Edit</button>
-
-</form>
+<div class="container">
+  <form class="text-center p-5 form-layout" id="share-receipt-form" [formGroup]="form" (submit)="edit()">
+    <p class="h4 mb-4">Share Recipe</p>
+  
+    <div class="col">
+      <div class="form-group">
+          <label for="meal">Meal</label>
+          <input type="text" id="defaultRecepieShareMeal" formControlName="meal" class="form-control mb-4" [value]="recipe.meal">
+          <div *ngIf="f.meal.touched">
+              <div class="alert alert-danger" *ngIf="f.meal.errors?.required">Field is required</div>
+              <div class="alert alert-danger" *ngIf="f.meal.errors?.pattern">Lenght must be atleast 4 characters</div>
+          </div>
+      </div>
+    </div>
+  
+    <div class="col">
+      <div class="form-group">
+          <label for="ingredients">Ingredients</label>
+          <input type="text" id="defaultRecepieShareIngredients" formControlName="ingredients" class="form-control mb-4"
+              [value]="recipe.ingredients">
+              <div *ngIf="f.ingredients.dirty && f.ingredients.dirty">
+                  <div class="alert alert-info">Please separate ingredients by space.</div>
+              </div>
+          <div *ngIf="f.ingredients.touched">
+              <div class="alert alert-danger" *ngIf="f.ingredients.errors?.required">Field is required</div>
+              <div class="alert alert-danger" *ngIf="f.ingredients.errors?.pattern">Lenght must be atleast 10 characters</div>
+          </div>
+      </div>
+    </div>
+  
+    <div class="col">
+      <div class="form-group">
+          <label for="prepMethod">Method of preparation</label>
+          <textarea type="text" id="defaultRecepieShareMethodOfPreparation" formControlName="prepMethod" class="form-control mb-4">
+            {{recipe.prepMethod}}
+          </textarea>
+          <div *ngIf="f.prepMethod.touched">
+              <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.required">Field is required</div>
+              <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.pattern">Lenght must be atleast 10 characters</div>
+          </div>
+      </div>
+    </div>
+    
+    <div class="col">
+      <div class="form-group">
+          <label for="foodImageURL">Image</label>
+          <input type="text" id="defaultRecepieShareFoodImageURL" formControlName="foodImageURL" class="form-control mb-4"
+          [value]="recipe.foodImageURL">
+          <div *ngIf="f.foodImageURL.touched">
+              <div class="alert alert-danger" *ngIf="f.foodImageURL.errors?.required">Field is required</div>
+          </div>
+      </div>
+    </div>
+  
+    <div class="col">
+      <div class="form-group">
+          <select formControlName="category" [value]="recipe.category">
+              <option>Select category...</option>
+              <option>Vegetables and legumes/beans</option>
+              <option>Fruits</option>
+              <option>Grain Food</option>
+              <option>Milk, cheese, eggs and alternatives</option>
+              <option>Lean meats and poultry, fish and alternatives</option>
+          </select>
+          <div *ngIf="f.category.touched">
+              <div class="alert alert-danger" *ngIf="f.category.errors?.required">Field is required</div>
+          </div>
+      </div>
+    </div>
+    
+    <button class="btn btn-danger w-25 m-auto my-4 btn-block" type="submit">Edit</button>
+  </form>
+  <div *ngIf="editRecipeFailed">
+    {{errMessage}}
+  </div>
+  </div>

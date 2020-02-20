@@ -18,8 +18,8 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent, },
     { path: 'register', component: RegisterComponent, },
     { path: 'userPanel', component: UserPanelComponent, canActivate: [AuthGuard] },
-    { path: 'recipes/:id', component: DetailsComponent, canActivate: [AuthGuard] },
-    { path: 'recipes/:id/edit', component: EditComponent, canActivate: [AuthGuard] },
+    { path: 'recipes/:id', component: DetailsComponent },
+    { path: 'recipes/:id/edit', component: EditComponent },
     { path: 'share', component: CreateComponent, canActivate: [AuthGuard] },
     { path: '', pathMatch: 'full', redirectTo: 'home' },
     { path: '**', component: PageNotFoundComponent }
