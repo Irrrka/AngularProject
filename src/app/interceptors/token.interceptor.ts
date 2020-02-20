@@ -20,6 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
         private router: Router) {
 
     }
+
     intercept(request: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
 
@@ -60,18 +61,17 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     private successfulLogin(data) {
-        if (data._kmd.roles !== undefined) {
-            console.log(data._kmd.roles)
-            localStorage.setItem('isAdmin', 'true');
-        } else {
-            localStorage.setItem('isAdmin', 'false')
-        }
+        // if (data._kmd.roles !== undefined) {
+        //     console.log(data._kmd.roles)
+        //     localStorage.setItem('isAdmin', 'true');
+        // } else {
+        //     localStorage.setItem('isAdmin', 'false')
+        // }
         this.authService.authToken = data['_kmd']['authtoken'];
         localStorage.setItem('authtoken', data['_kmd']['authtoken']);
         localStorage.setItem('username', data['username']);
-        localStorage.setItem('avatarUrl', data['avatarUrl']);
         localStorage.setItem('_id', data['_id']);
-        this.router.navigate(['/home'])
+        this.router.navigate(['/'])
     }
 
 }

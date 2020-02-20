@@ -66,8 +66,9 @@ export class DetailsComponent implements OnInit {
         }
       )
   }
-  edit(id) {
-    this.router.navigate([`/recipes/${id}/edit/`])
+  
+  edit() {
+    this.router.navigate([`/recipes/${this.id}/edit/`])
   }
 
 

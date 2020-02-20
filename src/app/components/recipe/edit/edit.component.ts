@@ -4,7 +4,6 @@ import { RecipeService } from '../../../services/recipe.service';
 import { FormGroup, FormControl, FormBuilder, FormsModule, Validator, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-
 const categories = {
   "Vegetables and legumes/beans":"https://cdn.pixabay.com/photo/2017/10/09/19/29/eat-2834549__340.jpg",
   "Fruits":"https://cdn.pixabay.com/photo/2017/06/02/18/24/fruit-2367029__340.jpg",
@@ -18,6 +17,7 @@ const categories = {
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
+
 export class EditComponent implements OnInit {
   id: string;
   recipe: RecipeModel;
@@ -39,10 +39,6 @@ export class EditComponent implements OnInit {
     "categoryImageURL": new FormControl('', [Validators.nullValidator]),
   });
 
-  get diagnostics() {
-    return JSON.stringify(this.form.value);
-  }
-
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
@@ -53,7 +49,7 @@ export class EditComponent implements OnInit {
         data => {
           this.recipe = new RecipeModel(
             data['meal'],
-            data['ingredients'].join(' '),
+            data['ingredients'].split(', '),
             data['prepMethod'],
             data['foodImageURL'],
             data['category'],
@@ -78,11 +74,11 @@ export class EditComponent implements OnInit {
 
     data.categoryImageURL = categories[category];
 
-      this.recipeService.edit(this.id, this.recipe)
+      this.recipeService.edit(this.id, data)
         .subscribe(
-          data => {
-            //console.log(data)
-            this.router.navigate(['/'])
+          res => {
+            //console.log(res)
+            this.router.navigate(['/home'])
           },
           err => {
             this.editRecipeFailed = true;

@@ -11,9 +11,9 @@
       </div>
       <h3 class="my-3 ingredient">Ingredients</h3>
           <div class="detailsIngredients">
-              <!-- {{#each recipe.ingredients}} -->
+            <ul>
               <li>{{recipe.ingredients}}</li>
-             <!--  {{/each}} -->
+            </ul>
       </div>
       <div class="actions">
           <div *ngIf="isCreator" class="nav-item">
@@ -21,7 +21,5 @@
             <a class="btn btn-info" (click)="edit()">Edit</a>
           </div>
             <!-- <a class="btn btn-success" routerLink="/like/{{recipe._id}}"> {{recipe.likesCounter}} likes</a> -->
-            <!-- {{else}}
-            {{/if}} -->
         </div>
   </div>

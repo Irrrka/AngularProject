@@ -62,7 +62,6 @@ export class CreateComponent implements OnInit {
           this.router.navigate(['/home'])
         },
         err => {
-          console.log(err)
           this.form.reset();
           this.createRecipeFailed = true;
           this.errMessage = err['error']['description']
