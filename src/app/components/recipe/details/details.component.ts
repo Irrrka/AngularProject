@@ -30,28 +30,24 @@ export class DetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    
+    //console.log(this.id)
     this.recipeService.getRecipe(this.id)
     .subscribe(
       data => {
+        console.log(data)
           this.isCreator = this.creatorId === data['_acl']['creator'];
+          const { meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL} = data;
           this.recipe = new RecipeModel(
-            data['meal'],
-            data['ingredients'],
-            data['prepMethod'],
-            data['foodImageURL'],
-            data['category'],
-            data['categoryImageURL'],
-          )
-          //this.recipe.ingredients
+            meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL
+          );
           console.log(this.recipe)
         },
         err => {
           console.log(err)
         }
-      )
-   
-   
+      );
+      //WHY????
+      console.log(this.recipe)
   }
 
   archive() {
@@ -66,7 +62,7 @@ export class DetailsComponent implements OnInit {
         }
       )
   }
-  
+
   edit() {
     this.router.navigate([`/recipes/${this.id}/edit/`])
   }

@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { RecipeModel } from "../models/recipe.model";
+import { Observable } from "rxjs";
 
 
 const appKey = "kid_BJdp2d8aB" // APP KEY HERE;
@@ -8,7 +10,7 @@ const userId = localStorage.getItem('_id');
 const username = localStorage.getItem('username');
 let id;//check
 const getAllRecipesUrl = `https://baas.kinvey.com/appdata/${appKey}/recipes`;
-const getRecipeByIdUrl = `https://baas.kinvey.com/appdata/${appKey}/recipes/${id}`;
+const getRecipeByIdUrl = `https://baas.kinvey.com/appdata/${appKey}/recipes/`;
 
 @Injectable()
 export class RecipeService {
@@ -20,8 +22,8 @@ export class RecipeService {
         return this.http.get(getAllRecipesUrl);
     }
 
-    getRecipe(id) {
-        return this.http.get(`${getAllRecipesUrl}/${id}`)
+    getRecipe(id): Observable<RecipeModel> {
+        return this.http.get<RecipeModel>(getRecipeByIdUrl+id);
     }
 
     create(model) {

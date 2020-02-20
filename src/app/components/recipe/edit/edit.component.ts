@@ -40,25 +40,30 @@ export class EditComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
+    //this.creatorId = localStorage.getItem('_id');
+    this.route.params.subscribe(data => {
+      this.id = data['id'];
     });
-
+    
     this.recipeService.getRecipe(this.id)
-      .subscribe(
-        data => {
+    .subscribe(
+      data => {
+        console.log("OnInit data: "+ data)
+         // this.isCreator = this.creatorId === data['_acl']['creator'];
           this.recipe = new RecipeModel(
             data['meal'],
-            data['ingredients'].split(', '),
+            data['ingredients'],
             data['prepMethod'],
             data['foodImageURL'],
             data['category'],
             data['categoryImageURL'],
-          )},
+          )
+        },
         err => {
           console.log(err)
         }
       )
+      console.log("OnInit recipe: "+this.recipe)
   }
 
   edit() {
@@ -74,16 +79,18 @@ export class EditComponent implements OnInit {
 
     data.categoryImageURL = categories[category];
 
-      this.recipeService.edit(this.id, data)
-        .subscribe(
-          res => {
-            //console.log(res)
-            this.router.navigate(['/home'])
-          },
-          err => {
-            this.editRecipeFailed = true;
-            this.errMessage = err['error']['description']
-          })
+    console.log("OnSubmit data" + data);
+    console.log("OnSubmit recipe" + this.recipe);
+      // this.recipeService.edit(this.id, data)
+      //   .subscribe(
+      //     res => {
+      //       //console.log(res)
+      //       this.router.navigate(['/home'])
+      //     },
+      //     err => {
+      //       this.editRecipeFailed = true;
+      //       this.errMessage = err['error']['description']
+      //     })
     }
 
   get f() {

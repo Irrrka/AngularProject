@@ -1,7 +1,7 @@
 <div class=" form-layout p-5">
       <div class="recepieInfo">
           <div class="detailsFoodImage">
-              <img src={{recipe.foodImageURL}} alt="foodImageURL">
+              <img [src]="recipe.foodImageURL" alt="foodImageURL">
           </div>
           <div class="infoPack">
           <h3 class="my-3">{{recipe.meal}}</h3>
@@ -10,9 +10,9 @@
           
       </div>
       <h3 class="my-3 ingredient">Ingredients</h3>
-          <div class="detailsIngredients">
+          <div class="detailsIngredients" *ngFor="let ingredient of recipe.ingredients">
             <ul>
-              <li>{{recipe.ingredients}}</li>
+              <li>{{ingredient}}</li>
             </ul>
       </div>
       <div class="actions">

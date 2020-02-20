@@ -11,13 +11,10 @@ import { FooterComponent } from './components/core/footer/footer.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-import { UserPanelComponent } from './components/user-panel/user-panel.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeAuthenticatedComponent } from './components/home-authenticated/home-authenticated.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 import { AuthService } from './components/authentication/auth.service';
-import { UserService } from './services/user.service';
 import { RecipeService } from './services/recipe.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CoreModule } from './components/core/core.module';
@@ -33,7 +30,6 @@ import { RecipeModule } from './components/recipe/recipe.module';
     HomeComponent,
     NavigationComponent,
     FooterComponent,
-    UserPanelComponent,
     PageNotFoundComponent,
     HomeAuthenticatedComponent,
   ],
@@ -47,7 +43,6 @@ import { RecipeModule } from './components/recipe/recipe.module';
   ],
   providers: [
     AuthService,
-    UserService,
     RecipeService,
     {
       provide: HTTP_INTERCEPTORS,

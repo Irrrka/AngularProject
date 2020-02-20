@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { UserService } from '../../services/user.service';
 import { AuthService } from '../../components/authentication/auth.service';
 import { Router } from '@angular/router';
 
@@ -17,7 +16,6 @@ export class HomeAuthenticatedComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private authService: AuthService,
-    private userService: UserService,
     private router: Router) { }
 
   ngOnInit() {

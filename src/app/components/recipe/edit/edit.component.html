@@ -1,14 +1,14 @@
 <div class="container">
   <form class="text-center p-5 form-layout" id="share-receipt-form" [formGroup]="form" (submit)="edit()">
-    <p class="h4 mb-4">Share Recipe</p>
+    <p class="h4 mb-4">Edit Recipe</p>
   
     <div class="col">
       <div class="form-group">
           <label for="meal">Meal</label>
-          <input type="text" id="defaultRecepieShareMeal" formControlName="meal" class="form-control mb-4" [value]="recipe.meal">
-          <div *ngIf="f.meal.touched">
+          <input type="text" id="defaultRecepieShareMeal" formControlName="meal" class="form-control mb-4" value={{recipe.meal}}>
+          <div *ngIf="f.meal.touched && f.meal.dirty">
               <div class="alert alert-danger" *ngIf="f.meal.errors?.required">Field is required</div>
-              <div class="alert alert-danger" *ngIf="f.meal.errors?.pattern">Lenght must be atleast 4 characters</div>
+              <div class="alert alert-danger" *ngIf="f.meal.errors?.minLenght">Lenght must be atleast 4 characters</div>
           </div>
       </div>
     </div>
@@ -16,14 +16,13 @@
     <div class="col">
       <div class="form-group">
           <label for="ingredients">Ingredients</label>
-          <input type="text" id="defaultRecepieShareIngredients" formControlName="ingredients" class="form-control mb-4"
-              [value]="recipe.ingredients">
-              <div *ngIf="f.ingredients.dirty && f.ingredients.dirty">
+          <input type="text" id="defaultRecepieShareIngredients" formControlName="ingredients" class="form-control mb-4" value={{recipe.ingredients}}>
+              <div *ngIf="f.ingredients.touched && f.ingredients.dirty">
                   <div class="alert alert-info">Please separate ingredients by space.</div>
               </div>
-          <div *ngIf="f.ingredients.touched">
+          <div *ngIf="f.ingredients.touched && f.ingredients.dirty">
               <div class="alert alert-danger" *ngIf="f.ingredients.errors?.required">Field is required</div>
-              <div class="alert alert-danger" *ngIf="f.ingredients.errors?.pattern">Lenght must be atleast 10 characters</div>
+              <div class="alert alert-danger" *ngIf="f.ingredients.errors?.minLenght">Lenght must be atleast 10 characters</div>
           </div>
       </div>
     </div>
@@ -34,9 +33,9 @@
           <textarea type="text" id="defaultRecepieShareMethodOfPreparation" formControlName="prepMethod" class="form-control mb-4">
             {{recipe.prepMethod}}
           </textarea>
-          <div *ngIf="f.prepMethod.touched">
+          <div *ngIf="f.prepMethod.touched && f.prepMethod.dirty">
               <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.required">Field is required</div>
-              <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.pattern">Lenght must be atleast 10 characters</div>
+              <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.minLength">Lenght must be atleast 10 characters</div>
           </div>
       </div>
     </div>
@@ -44,17 +43,17 @@
     <div class="col">
       <div class="form-group">
           <label for="foodImageURL">Image</label>
-          <input type="text" id="defaultRecepieShareFoodImageURL" formControlName="foodImageURL" class="form-control mb-4"
-          [value]="recipe.foodImageURL">
+          <input type="text" id="defaultRecepieShareFoodImageURL" formControlName="foodImageURL" class="form-control mb-4" value={{recipe.foodImageURL}}>>
           <div *ngIf="f.foodImageURL.touched">
               <div class="alert alert-danger" *ngIf="f.foodImageURL.errors?.required">Field is required</div>
+              <div class="alert alert-danger" *ngIf="f.foodImageURL.errors?.pattern">Please link a photo</div>
           </div>
       </div>
     </div>
   
     <div class="col">
       <div class="form-group">
-          <select formControlName="category" [value]="recipe.category">
+          <select formControlName="category" value={{recipe.category}}>
               <option>Select category...</option>
               <option>Vegetables and legumes/beans</option>
               <option>Fruits</option>

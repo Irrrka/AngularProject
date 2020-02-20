@@ -4,10 +4,8 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
-import { UserPanelComponent } from './components/user-panel/user-panel.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeAuthenticatedComponent } from './components/home-authenticated/home-authenticated.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { DetailsComponent } from './components/recipe/details/details.component';
 import { CreateComponent } from './components/recipe/create/create.component';
 import { EditComponent } from './components/recipe/edit/edit.component';
@@ -17,9 +15,8 @@ const routes: Routes = [
     { path: 'welcome', component: HomeComponent, },
     { path: 'login', component: LoginComponent, },
     { path: 'register', component: RegisterComponent, },
-    { path: 'userPanel', component: UserPanelComponent, canActivate: [AuthGuard] },
-    { path: 'recipes/:id', component: DetailsComponent },
-    { path: 'recipes/:id/edit', component: EditComponent },
+    { path: 'recipes/:id', component: DetailsComponent, canActivate: [AuthGuard]  },
+    { path: 'recipes/:id/edit', component: EditComponent, canActivate: [AuthGuard]  },
     { path: 'share', component: CreateComponent, canActivate: [AuthGuard] },
     { path: '', pathMatch: 'full', redirectTo: 'home' },
     { path: '**', component: PageNotFoundComponent }

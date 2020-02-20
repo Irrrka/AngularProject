@@ -53,7 +53,7 @@ export class TokenInterceptor implements HttpInterceptor {
                             this.router.navigate(['/login']);
                             break;
                         case 404:
-                            this.router.navigate(['/login']);
+                            this.router.navigate(['/home']);
                             break;
                     }
                 }

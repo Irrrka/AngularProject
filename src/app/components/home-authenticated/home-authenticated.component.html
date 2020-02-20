@@ -16,9 +16,9 @@
                         <div class="back-side-info">
                           <h4>Ingredients</h4>
                             <div *ngFor="let ingredient of recipe.ingredients">
-                            <ul>
-                                <li>{{ingredient}}</li>      
-                            </ul>
+                                <ul>
+                                    <li>{{ingredient}}</li>      
+                                </ul>
                             </div>
                             <a [routerLink]="['/recipes/', recipe._id]">View the recipe</a>
                         </div>

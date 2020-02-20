@@ -6,9 +6,9 @@
     <div class="form-group">
         <label for="meal">Meal</label>
         <input type="text" id="defaultRecepieShareMeal" formControlName="meal" class="form-control mb-4" placeholder="Meal">
-        <div *ngIf="f.meal.touched">
+        <div *ngIf="f.meal.touched && f.meal.dirty">
             <div class="alert alert-danger" *ngIf="f.meal.errors?.required">Field is required</div>
-            <div class="alert alert-danger" *ngIf="f.meal.errors?.pattern">Lenght must be atleast 4 characters</div>
+            <div class="alert alert-danger" *ngIf="f.meal.errors?.minLenght">Lenght must be atleast 4 characters</div>
         </div>
     </div>
   </div>
@@ -18,12 +18,12 @@
         <label for="ingredients">Ingredients</label>
         <input type="text" id="defaultRecepieShareIngredients" formControlName="ingredients" class="form-control mb-4"
             placeholder="Ingredients">
-            <div *ngIf="f.ingredients.dirty && f.ingredients.dirty">
+            <div *ngIf="f.ingredients.touched && f.ingredients.dirty">
                 <div class="alert alert-info">Please separate ingredients by space.</div>
             </div>
-        <div *ngIf="f.ingredients.touched">
+        <div *ngIf="f.ingredients.touched && f.ingredients.dirty">
             <div class="alert alert-danger" *ngIf="f.ingredients.errors?.required">Field is required</div>
-            <div class="alert alert-danger" *ngIf="f.ingredients.errors?.pattern">Lenght must be atleast 10 characters</div>
+            <div class="alert alert-danger" *ngIf="f.ingredients.errors?.minLenght">Lenght must be atleast 10 characters</div>
         </div>
     </div>
   </div>
@@ -33,9 +33,9 @@
         <label for="prepMethod">Method of preparation</label>
         <textarea type="text" id="defaultRecepieShareMethodOfPreparation" formControlName="prepMethod" class="form-control mb-4"
             placeholder="Method of preparation"></textarea>
-        <div *ngIf="f.prepMethod.touched">
+        <div *ngIf="f.prepMethod.touched && f.prepMethod.dirty">
             <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.required">Field is required</div>
-            <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.pattern">Lenght must be atleast 10 characters</div>
+            <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.minLength">Lenght must be atleast 10 characters</div>
         </div>
     </div>
   </div>
@@ -45,9 +45,10 @@
         <label for="foodImageURL">Image</label>
         <input type="text" id="defaultRecepieShareFoodImageURL" formControlName="foodImageURL" class="form-control mb-4"
             placeholder="Food Image URL...">
-        <div *ngIf="f.foodImageURL.touched">
-            <div class="alert alert-danger" *ngIf="f.foodImageURL.errors?.required">Field is required</div>
-        </div>
+            <div *ngIf="f.foodImageURL.touched && f.foodImageURL.dirty">
+                    <div class="alert alert-danger" *ngIf="f.foodImageURL.errors?.required">Field is required</div>
+                    <div class="alert alert-danger" *ngIf="f.foodImageURL.errors?.pattern">Please link a photo</div>
+                </div>
     </div>
   </div>
 
@@ -61,7 +62,7 @@
             <option>Milk, cheese, eggs and alternatives</option>
             <option>Lean meats and poultry, fish and alternatives</option>
         </select>
-        <div *ngIf="f.category.touched">
+        <div *ngIf="f.category.touched && f.category.dirty">
             <div class="alert alert-danger" *ngIf="f.category.errors?.required">Field is required</div>
         </div>
     </div>
