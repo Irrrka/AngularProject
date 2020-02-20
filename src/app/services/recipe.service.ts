@@ -25,12 +25,12 @@ export class RecipeService {
     }
 
     create(model) {
-        console.log(model);
+        //console.log(model);
         return this.http.post(getAllRecipesUrl, model);
     }
     
     edit(id, model) {
-        console.log(id, model);
+        //console.log(id, model);
         return this.http.put(
             `${getAllRecipesUrl}/${id}`,model);
     }
