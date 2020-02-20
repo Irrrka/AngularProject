@@ -10,20 +10,17 @@ import { AuthService } from '../../authentication/auth.service';
 export class NavigationComponent implements OnInit {
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit() {
-  console.log(this.authService.checkIfLogged());
+  
   }
   get username() {
-    return localStorage.getItem('username');
+    return localStorage.getItem('username')
   }
 
-  get isAuthenticated(){
-    return this.authService.checkIfLogged();
-  }
 
   logout() {
     this.authService.logout()

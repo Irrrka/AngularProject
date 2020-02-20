@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../../../interfaces/user';
-import { FormGroup, FormControl, Validator, Validators, FormBuilder } from '@angular/forms';
+import { LoginModel } from '../../../models/login.model';
+import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -10,21 +10,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model: IUser;
+  model: LoginModel;
   loginFailed: boolean;
   errMessage: string;
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private fb: FormBuilder) {
+    private router: Router) {
+    this.model = new LoginModel('', '')
   }
 
- //Refactor
- form = this.fb.group({
-  "username": new FormControl('', [Validators.required]),
-  "password": new FormControl('', [Validators.required]),
-});
+  form = new FormGroup({
+    "username": new FormControl('', [Validators.required]),
+    "password": new FormControl('', [Validators.required])
+  })
 
   ngOnInit() {
   }
@@ -36,13 +35,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.form.value)
-  
-      .subscribe((data) => {
-        console.log(data)
-          localStorage.setItem('authtoken', data['_kmd']['authtoken']);
-          localStorage.setItem('_id', data['_id']);
-          localStorage.setItem('username', data['username']);
-          this.router.navigate(['/home']);
+      .subscribe(
+        data => {
+          //localStorage.setItem('authtoken', data['authtoken']);
+          //this.router.navigate(['/home']);
         },
         err => {
           this.form.reset();

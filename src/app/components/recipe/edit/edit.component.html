@@ -1,3 +1,29 @@
-<p>
-  edit works!
-</p>
+
+<form class="text-center p-5 form-layout" [formGroup]="form" (submit)="edit()" id="edit-receipt-form" >
+  <p class="h4 mb-4">Edit Recipe</p>
+
+  <input type="text" id="defaultRecepieEditMeal" formControlName="meal" class="form-control mb-4" placeholder="Meal" value="{{recipe.meal}}">
+
+  <input type="text" id="defaultRecepieEditIngredients" formControlName="ingredients" class="form-control mb-4"
+    placeholder="Ingredients" value="{{recipe.ingredients}}">
+
+  <textarea type="text" id="defaultRecepieEditMethodOfPreparation" formControlName="prepMethod" class="form-control mb-4"
+    placeholder="Method of preparation">{{recipe.prepMethod}}</textarea>
+
+  <textarea type="text" id="defaultRecepieEditDescription" formControlName="description" class="form-control mb-4"
+    placeholder="Description">{{recipe.description}}</textarea>
+
+  <input type="text" id="defaultRecepieEditFoodImageURL" formControlName="foodImageURL" class="form-control mb-4"
+    placeholder="Food Image URL..." value="{{recipe.foodImageURL}}">
+
+  <select formControlName="category" value="{{recipe.category}}">
+    <option selected>Select category...</option>
+    <option>Vegetables and legumes/beans</option>
+    <option>Fruits</option>
+    <option>Grain Food</option>
+    <option>Milk, cheese, eggs and alternatives</option>
+    <option>Lean meats and poultry, fish and alternatives</option>
+  </select>
+  <button class="btn btn-danger w-25 m-auto my-4 btn-block" type="submit">Edit</button>
+
+</form>

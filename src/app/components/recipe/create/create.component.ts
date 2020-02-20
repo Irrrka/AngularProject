@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { IRecipe } from '../../../interfaces/recipe';
-import { RecipeService } from 'src/app/services/recipe.service';
-import { CustomValidators } from 'src/app/validators/custom-validators';
+import { RecipeModel } from '../../../models/recipe.model';
+import { RecipeService } from '../../../services/recipe.service';
+import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,45 +10,46 @@ import { Router } from '@angular/router';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-
-  form: FormGroup;
-  ingredients: FormArray;
-  model: IRecipe;
-  createFailed: boolean;
+  model: RecipeModel;
+  createRecipeFailed: boolean;
   errMessage: string;
-  
-  constructor(private recipeService: RecipeService, 
-              private formBuilder: FormBuilder, 
-              private router: Router) { }
 
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router) {
+    this.model = new RecipeModel('', new Array(), '', '', '', '', '')
+  }
+
+  form = new FormGroup({
+    "meal": new FormControl('', [Validators.required]),
+    "ingredients": new FormControl(''),
+    "description": new FormControl(''),
+    "prepMethod": new FormControl(''),
+    "category": new FormControl(''),
+    "foodImageURL": new FormControl(''),
+    "categoryImageURL": new FormControl(''),
+  });
+
+
+  get diagnostics() {
+    return JSON.stringify(this.form.value);
+  }
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      meal: ['', [Validators.required, Validators.minLength(4)]],
-      //ingredients: this.formBuilder.array([], Validators.required),
-      prepMethod: ['', [Validators.required, Validators.minLength(10)]],
-      description: ['', [Validators.minLength(10)]],
-      foodImageURL: ['', [Validators.required, Validators.pattern("^(http|https)://")]],
-      //category: ['', [Validators.required]],
-      //categoryImageURL: ['', [Validators.required]],
-    });
   }
 
   share() {
-    this.recipeService.create(this.form.value)
+    this.recipeService.create(this.model)
       .subscribe(
         data => {
-          this.router.navigate(['/recipes/all'])
+          console.log(data)
+          this.router.navigate(['/home'])
         },
         err => {
-          console.log(err);
+          console.log(err)
           this.form.reset();
-          this.createFailed = true;
+          this.createRecipeFailed = true;
           this.errMessage = err['error']['description']
         })
-  }
-
-  get f() {
-    return this.form.controls;
   }
 
 }

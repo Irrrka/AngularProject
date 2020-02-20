@@ -39,36 +39,37 @@ export class TokenInterceptor implements HttpInterceptor {
             })
         }
 
-        return next.handle(request);
-            // .pipe(tap((event: HttpEvent<any>) => {
-            //     if (event instanceof HttpResponse && request.url.endsWith('login')) {
-            //         this.successfulLogin(event['body'])
-            //     }
-            // }, (err: any) => {
-            //     if (err instanceof HttpErrorResponse) {
-            //         switch (err.status) {
-            //             case 401:
-            //                 this.router.navigate(['/login']);
-            //                 break;
-            //             case 404:
-            //                 this.router.navigate(['/home']);
-            //                 break;
-            //         }
-            //     }
-            // }));
+
+        return next.handle(request)
+            .pipe(tap((event: HttpEvent<any>) => {
+                if (event instanceof HttpResponse && request.url.endsWith('login')) {
+                    this.successfulLogin(event['body'])
+                }
+            }, (err: any) => {
+                if (err instanceof HttpErrorResponse) {
+                    switch (err.status) {
+                        case 401:
+                            this.router.navigate(['/login']);
+                            break;
+                        case 404:
+                            this.router.navigate(['/login']);
+                            break;
+                    }
+                }
+            }));
     }
 
     private successfulLogin(data) {
-        console.log(data)
-        // if (data._kmd.roles !== undefined) {
-        //     console.log(data._kmd.roles)
-        //     localStorage.setItem('isAdmin', 'true');
-        // } else {
-        //     localStorage.setItem('isAdmin', 'false')
-        // }
+        if (data._kmd.roles !== undefined) {
+            console.log(data._kmd.roles)
+            localStorage.setItem('isAdmin', 'true');
+        } else {
+            localStorage.setItem('isAdmin', 'false')
+        }
         this.authService.authToken = data['_kmd']['authtoken'];
         localStorage.setItem('authtoken', data['_kmd']['authtoken']);
         localStorage.setItem('username', data['username']);
+        localStorage.setItem('avatarUrl', data['avatarUrl']);
         localStorage.setItem('_id', data['_id']);
         this.router.navigate(['/home'])
     }

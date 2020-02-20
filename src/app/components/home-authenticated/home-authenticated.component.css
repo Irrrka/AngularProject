@@ -1,0 +1,59 @@
+#listings {
+    width: 92%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.listing {
+    padding-top: 30px;
+    /* padding-left: 50px; */
+    height: 520px;
+    width: 319px;
+    margin: auto;
+    margin: 15px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+
+.listing>img {
+    height: 180px;
+    width: 265px;
+}
+
+.cartube-button {
+    box-shadow: 1px 4px 5px 0px #ab6316;
+    background: linear-gradient(to bottom, #750000 5%, #b80000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#750000', endColorstr='#b80000', GradientType=0);
+    background-color: #750000;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: League-Gothic;
+    font-size: 1.5vw;
+    padding: 4px 20px;
+    margin: 5px;
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-shadow: 1px 1px 0px #000000;
+}
+
+span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+p#title {
+    font-weight: bold;
+}
+
+hr{
+    color:lightgray;
+    border: 1px solid lightgray;
+    width: 80%;
+}

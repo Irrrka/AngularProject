@@ -28,23 +28,12 @@ export class UserPanelComponent implements OnInit {
 
     this.userService.getUserData(localStorage.getItem('_id'))
       .subscribe(data => {
-        this.userData = data
+        this.userData = data;
         //refactor
-        this.recipeService.getRecipe(this.userData['username'])
-          .subscribe(
-            data => {
-              console.log(data)
-              this.recipes = data;
-              console.log(this.recipes)
-            },
+      },
             err => {
               console.log(err)
-            })
-      }, err => {
-        console.log(err)
       })
-
-
   }
 
   get username() {

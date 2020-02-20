@@ -21,10 +21,8 @@ import { UserService } from './services/user.service';
 import { RecipeService } from './services/recipe.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CoreModule } from './components/core/core.module';
-import { CreateComponent } from './components/recipe/create/create.component';
-import { EditComponent } from './components/recipe/edit/edit.component';
 import { DetailsComponent } from './components/recipe/details/details.component';
-import { AllComponent } from './components/recipe/all/all.component';
+import { RecipeModule } from './components/recipe/recipe.module';
 
 
 @NgModule({
@@ -35,10 +33,7 @@ import { AllComponent } from './components/recipe/all/all.component';
     HomeComponent,
     NavigationComponent,
     FooterComponent,
-    CreateComponent,
-    EditComponent,
-    DetailsComponent,
-    AllComponent,
+    UserPanelComponent,
     PageNotFoundComponent,
     HomeAuthenticatedComponent,
   ],
@@ -48,6 +43,7 @@ import { AllComponent } from './components/recipe/all/all.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RecipeModule
   ],
   providers: [
     AuthService,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RegisterModel } from '../../../models/register.model';
+import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { CustomValidators } from '../../../validators/custom-validators';
@@ -11,22 +12,24 @@ import { CustomValidators } from '../../../validators/custom-validators';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerFailed: boolean;
+  model: RegisterModel;
+  loginFailed: boolean;
   errMessage: string;
 
   constructor(
     private authService: AuthService,
     private router: Router) {
+    this.model = new RegisterModel('', '')
   }
 
-    //Refactor
-    form = new FormGroup({
-      "username": new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]),
-      "password": new FormControl('', [Validators.required,
-                                      new CustomValidators().mustMatch('confirmPassword'), 
-                                      Validators.pattern('[a-zA-Z0-9]+')]),
-      "confirmPassword": new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z0-9]+')]),
-    });
+  //Refactor
+  form = new FormGroup({
+    "username": new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]),
+    "password": new FormControl('', [Validators.required,
+                                    new CustomValidators().mustMatch('confirmPassword'), 
+                                    Validators.pattern('[a-zA-Z0-9]+')]),
+    "confirmPassword": new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z0-9]+')]),
+  })
 
   get diagnostics() {
     return JSON.stringify(this.form.value);
@@ -37,12 +40,13 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.authService.register(this.form.value)
-      .subscribe(() => {
-          this.router.navigate(['/signin'])
+      .subscribe(
+        data => {
+          this.router.navigate(['/login'])
         },
         err => {
           this.form.reset();
-          this.registerFailed = true;
+          this.loginFailed = true;
           this.errMessage = err['error']['description']
         })
   }

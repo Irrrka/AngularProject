@@ -3,7 +3,6 @@ import { RecipeService } from '../../services/recipe.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../components/authentication/auth.service';
 import { Router } from '@angular/router';
-import { IRecipe } from 'src/app/interfaces/recipe';
 
 @Component({
   selector: 'app-home-authenticated',
@@ -11,9 +10,8 @@ import { IRecipe } from 'src/app/interfaces/recipe';
   styleUrls: ['./home-authenticated.component.css']
 })
 export class HomeAuthenticatedComponent implements OnInit {
-  //TODO
-  recipes: IRecipe[]
-  creatorId: string;
+  recipes: Object
+  //creatorId: string;
   currentUserId: string;
 
   constructor(
@@ -23,42 +21,16 @@ export class HomeAuthenticatedComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.currentUserId = localStorage.getItem('_id');
+
     this.recipeService.getAllRecipes()
       .subscribe(
         data => {
-          console.log(data)
-          this.currentUserId = localStorage.getItem('_id');
+          this.recipes = data;
         },
         err => {
           console.log(err)
         })
   }
-
-  recipeInfo(id) {
-    //this.router.navigate(['/listingDetails', id])
-  }
-
-  // listingCreator(creatorId) {
-  //   if (creatorId === localStorage.getItem('_id')) {
-  //     this.router.navigate(['/userPanel'])
-  //   } else {
-  //     this.router.navigate(['/userProfileDetails', creatorId])
-  //   }
-  // }
-  // deleteListing(id) {
-  //   this.recipeService.delete(id)
-  //     .subscribe(
-  //       data => {
-  //         console.log(data)
-  //         this.router.navigate(['/home'])
-  //       },
-  //       err => {
-  //         console.log(err)
-  //       }
-  //     )
-  // }
-  // editListing(id) {
-  //   this.router.navigate(['/editListing', id])
-  // }
-
+ 
 }

@@ -18,27 +18,28 @@
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" class="form-control" formControlName="password">
-          <div *ngIf="f.password.touched && f.password.dirty"></div>
-          <div class="alert alert-danger" *ngIf="f.password.errors?.required">Password is Required</div>
+          <div *ngIf="f.password.touched && f.password.dirty">
+            <div class="alert alert-danger" *ngIf="f.password.errors?.required">Password is Required</div>
+            <div class="alert alert-danger" *ngIf="f.password.errors?.mustMatch">Password must match</div>
+          </div>
         </div>
       </div>
-
       <div class="col">
         <div class="form-group">
           <label for="confirmPassword">Confirm Password</label>
           <input type="password" class="form-control" formControlName="confirmPassword">
-          <div *ngIf="f.confirmPassword.touched && f.confirmPassword.dirty"></div>
+          <div *ngIf="f.confirmPassword.touched && f.confirmPassword.dirty">
             <div class="alert alert-danger" *ngIf="f.confirmPassword.errors?.required">Confirm Password is required
             </div>
-            <div class="alert alert-danger" *ngIf="f.password.errors?.mustMatch">Password must match</div>
           </div>
-          </div>
+        </div>
+      </div>
 
     <hr>
 
     <button class="btn btn-danger my-4 btn-block w-25 m-auto" type="submit">Sign up</button>
   </form>
-  <div *ngIf="registerFailed">
+  <div *ngIf="loginFailed">
     {{errMessage}}
   </div>
 
