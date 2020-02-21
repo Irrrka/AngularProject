@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginModel } from '../../../models/login.model';
-import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.form.value)
       .subscribe(
         data => {
-          //localStorage.setItem('authtoken', data['authtoken']);
-          //this.router.navigate(['/home']);
+          localStorage.setItem('authtoken', data['_kmd']['authtoken']);
+          this.router.navigate(['/home']);
         },
         err => {
           this.form.reset();

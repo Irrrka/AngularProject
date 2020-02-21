@@ -76,4 +76,8 @@ export class EditComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
+
+  get invalid() {
+    return this.form.invalid;
+  }
 }

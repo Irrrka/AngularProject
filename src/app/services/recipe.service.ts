@@ -18,8 +18,8 @@ export class RecipeService {
     constructor(private http: HttpClient) {
     }
 
-    getAllRecipes() {
-        return this.http.get(getAllRecipesUrl);
+    getAllRecipes(): Observable<RecipeModel[]> {
+        return this.http.get<RecipeModel[]>(getAllRecipesUrl);
     }
 
     getRecipe(id): Observable<RecipeModel> {

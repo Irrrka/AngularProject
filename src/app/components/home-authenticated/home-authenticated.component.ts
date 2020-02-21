@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { AuthService } from '../../components/authentication/auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { RecipeModel } from '../../models/recipe.model'
 
 @Component({
   selector: 'app-home-authenticated',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-authenticated.component.css']
 })
 export class HomeAuthenticatedComponent implements OnInit {
-  recipes: Object
+  recipes$: Observable<RecipeModel[]>
   //creatorId: string;
   currentUserId: string;
 
@@ -21,14 +23,6 @@ export class HomeAuthenticatedComponent implements OnInit {
   ngOnInit() {
     this.currentUserId = localStorage.getItem('_id');
 
-    this.recipeService.getAllRecipes()
-      .subscribe(
-        data => {
-          this.recipes = data;
-        },
-        err => {
-          console.log(err)
-        })
+    this.recipes$ = this.recipeService.getAllRecipes();
   }
- 
 }

@@ -8,7 +8,7 @@
           <label for="username">Username</label>
           <input type="text" class="form-control" formControlName="username">
           <div *ngIf="f.username.touched && f.username.dirty">
-            <div class="alert alert-danger" *ngIf="f.username.errors?.required">Form is required</div>
+            <div class="alert alert-danger" *ngIf="f.username.errors?.required">Username is required</div>
             <div class="alert alert-danger" *ngIf="f.username.errors?.pattern">Username must contain only Alphanumeric characters</div>
           </div>
         </div>

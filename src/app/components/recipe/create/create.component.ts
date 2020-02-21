@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeModel } from '../../../models/recipe.model';
 import { RecipeService } from '../../../services/recipe.service';
-import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validator, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 const categories = {
@@ -19,29 +19,32 @@ const categories = {
 })
 
 export class CreateComponent implements OnInit {
+  form: FormGroup;
   model: RecipeModel;
   createRecipeFailed: boolean;
   errMessage: string;
 
   constructor(
     private recipeService: RecipeService,
-    private router: Router) {
-    //this.model = new RecipeModel('', '', '', '', '', '')
+    private router: Router,
+    private fb: FormBuilder) {
   }
 
-  form = new FormGroup({
-    "meal": new FormControl('', [Validators.required, Validators.minLength(4)]),
-    "ingredients": new FormControl('', [Validators.required, Validators.minLength(10)]),
-    "prepMethod": new FormControl('', [Validators.required, Validators.minLength(10)]),
-    "foodImageURL": new FormControl('', [Validators.required]),
-    "category": new FormControl('', [Validators.required]),
-    "categoryImageURL": new FormControl('', [Validators.nullValidator]),
-  });
-
   ngOnInit() {
+    this.form =this.fb.group({
+      "meal": ['', [
+        Validators.required, Validators.minLength(4)]],
+      "ingredients": ['', [Validators.required, Validators.minLength(10)]],
+      "prepMethod": ['', [Validators.required, Validators.minLength(10)]],
+      "foodImageURL": ['', [Validators.required]],
+      "category": ['', [Validators.required]],
+      "categoryImageURL": ['', [Validators.nullValidator]],
+    });
+    console.log(this.form)
   }
 
   share() {
+    //console.log(this.form.controls)
     const {meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL } = this.form.value;
     let data = {
       meal,
@@ -69,6 +72,11 @@ export class CreateComponent implements OnInit {
 
   get f() {
     return this.form.controls;
+
+  }
+
+  get invalid() {
+    return this.form.invalid;
   }
 
 }

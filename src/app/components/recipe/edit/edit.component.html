@@ -8,7 +8,7 @@
           <input type="text" id="defaultRecepieShareMeal" formControlName="meal" class="form-control mb-4" value={{recipe.meal}}>
           <div *ngIf="f.meal.touched && f.meal.dirty">
               <div class="alert alert-danger" *ngIf="f.meal.errors?.required">Field is required</div>
-              <div class="alert alert-danger" *ngIf="f.meal.errors?.minLenght">Lenght must be atleast 4 characters</div>
+              <div class="alert alert-danger" *ngIf="f.meal.errors?.minlenght">Lenght must be atleast 4 characters</div>
           </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
               </div>
           <div *ngIf="f.ingredients.touched && f.ingredients.dirty">
               <div class="alert alert-danger" *ngIf="f.ingredients.errors?.required">Field is required</div>
-              <div class="alert alert-danger" *ngIf="f.ingredients.errors?.minLenght">Lenght must be atleast 10 characters</div>
+              <div class="alert alert-danger" *ngIf="f.ingredients.errors?.minlenght">Lenght must be atleast 10 characters</div>
           </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
         <textarea class="form-control" formControlName="prepMethod">{{recipe.prepMethod}}</textarea>
           <div *ngIf="f.prepMethod.touched && f.prepMethod.dirty">
             <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.required">Field is required</div>
-            <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.minLenght">Lenght must be atleast 10 characters</div>
+            <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.minlenght">Lenght must be atleast 10 characters</div>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
       </div>
     </div>
     
-    <button class="btn btn-danger w-25 m-auto my-4 btn-block" type="submit">Edit</button>
+    <button class="btn btn-danger w-25 m-auto my-4 btn-block" type="submit" [disabled]="invalid">Edit</button>
   </form>
   <div *ngIf="editRecipeFailed">
     {{errMessage}}
