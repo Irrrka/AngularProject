@@ -1,10 +1,8 @@
-export class RecipeModel {
-    constructor(
-        public meal: string,
-        public ingredients: string,  
-        public prepMethod: string,
-        public foodImageURL: string,  
-        public category: string,   
-        public categoryImageURL: string,  
-    ) { }
+export interface RecipeModel {
+        meal: string;
+        ingredients: string;  
+        prepMethod: string;
+        foodImageURL: string;  
+        category: string;   
+        categoryImageURL: string;  
 }

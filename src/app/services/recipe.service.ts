@@ -33,8 +33,8 @@ export class RecipeService {
     
     edit(id, model) {
         //console.log(id, model);
-        return this.http.put(
-            `${getAllRecipesUrl}/${id}`,model);
+        //https://baas.kinvey.com/appdata/app_id/recipes/recipe_id
+        return this.http.put(getRecipeByIdUrl+id,model);
     }
 
     delete(id) {

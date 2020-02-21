@@ -3,7 +3,6 @@ import { RecipeModel } from '../../../models/recipe.model';
 import { RecipeService } from '../../../services/recipe.service';
 import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 const categories = {
   "Vegetables and legumes/beans":"https://cdn.pixabay.com/photo/2017/10/09/19/29/eat-2834549__340.jpg",
@@ -34,7 +33,7 @@ export class CreateComponent implements OnInit {
     "meal": new FormControl('', [Validators.required, Validators.minLength(4)]),
     "ingredients": new FormControl('', [Validators.required, Validators.minLength(10)]),
     "prepMethod": new FormControl('', [Validators.required, Validators.minLength(10)]),
-    "foodImageURL": new FormControl('', [Validators.required, Validators.pattern('^(http|https)://')]),
+    "foodImageURL": new FormControl('', [Validators.required]),
     "category": new FormControl('', [Validators.required]),
     "categoryImageURL": new FormControl('', [Validators.nullValidator]),
   });

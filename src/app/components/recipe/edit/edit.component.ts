@@ -3,6 +3,7 @@ import { RecipeModel } from '../../../models/recipe.model';
 import { RecipeService } from '../../../services/recipe.service';
 import { FormGroup, FormControl, FormBuilder, FormsModule, Validator, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TagPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 const categories = {
   "Vegetables and legumes/beans":"https://cdn.pixabay.com/photo/2017/10/09/19/29/eat-2834549__340.jpg",
@@ -34,13 +35,12 @@ export class EditComponent implements OnInit {
     "meal": new FormControl('', [Validators.required, Validators.minLength(4)]),
     "ingredients": new FormControl('', [Validators.required, Validators.minLength(10)]),
     "prepMethod": new FormControl('', [Validators.required, Validators.minLength(10)]),
-    "foodImageURL": new FormControl('', [Validators.required, Validators.pattern('^(http|https)://')]),
+    "foodImageURL": new FormControl('', [Validators.required]),
     "category": new FormControl('', [Validators.required]),
     "categoryImageURL": new FormControl('', [Validators.nullValidator]),
   });
 
   ngOnInit() {
-    //this.creatorId = localStorage.getItem('_id');
     this.route.params.subscribe(data => {
       this.id = data['id'];
     });
@@ -48,49 +48,36 @@ export class EditComponent implements OnInit {
     this.recipeService.getRecipe(this.id)
     .subscribe(
       data => {
-        console.log("OnInit data: "+ data)
-         // this.isCreator = this.creatorId === data['_acl']['creator'];
-          this.recipe = new RecipeModel(
-            data['meal'],
-            data['ingredients'],
-            data['prepMethod'],
-            data['foodImageURL'],
-            data['category'],
-            data['categoryImageURL'],
-          )
+        //console.log(data);
+          this.recipe = data;
         },
         err => {
-          console.log(err)
+          //console.log(err)
         }
       )
-      console.log("OnInit recipe: "+this.recipe)
   }
 
   edit() {
+    console.log(this.form.value)
     const {meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL } = this.form.value;
-    let data = {
-      meal,
-      ingredients: ingredients.split(' '),
-      prepMethod,
-      foodImageURL,
-      category,
-      categoryImageURL
-    }
-
-    data.categoryImageURL = categories[category];
-
-    console.log("OnSubmit data" + data);
-    console.log("OnSubmit recipe" + this.recipe);
-      // this.recipeService.edit(this.id, data)
-      //   .subscribe(
-      //     res => {
-      //       //console.log(res)
-      //       this.router.navigate(['/home'])
-      //     },
-      //     err => {
-      //       this.editRecipeFailed = true;
-      //       this.errMessage = err['error']['description']
-      //     })
+    let data: RecipeModel;
+    data.meal = meal || this.recipe.meal;
+    data.ingredients = ingredients || this.recipe.ingredients;
+    data.prepMethod = prepMethod || this.recipe.prepMethod;
+    data.category = category || this.recipe.category;
+    data.categoryImageURL = categories[data.category];
+    console.log(data)
+    this.recipeService.edit(this.id, data)
+        .subscribe(
+          res => {
+            console.log(res)
+            //this.router.navigate(['/home'])
+          },
+          err => {
+            console.log(err)
+            //this.editRecipeFailed = true;
+            //this.errMessage = err['error']['description']
+          })
     }
 
   get f() {

@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from '../../../services/recipe.service';
 import { AuthService } from '../../authentication/auth.service';
 import { RecipeModel } from '../../../models/recipe.model';
-import { RecipeModule } from '../recipe.module';
 
 @Component({
   selector: 'app-details',
@@ -34,28 +33,26 @@ export class DetailsComponent implements OnInit {
     this.recipeService.getRecipe(this.id)
     .subscribe(
       data => {
-        console.log(data)
+        //console.log(data)
           this.isCreator = this.creatorId === data['_acl']['creator'];
           const { meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL} = data;
-          this.recipe = new RecipeModel(
-            meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL
-          );
-          console.log(this.recipe)
+          this.recipe = data;
+          //console.log(this.recipe)
         },
         err => {
           console.log(err)
         }
       );
-      //WHY????
-      console.log(this.recipe)
+      //WHY ундефинед????
+      //console.log(this.recipe)
   }
 
   archive() {
     this.recipeService.delete(this.id)
       .subscribe(
         data => {
-          console.log(data)
-          this.router.navigate(['/'])
+          //console.log(data)
+          this.router.navigate(['/home'])
         },
         err => {
           console.log(err)
@@ -66,7 +63,4 @@ export class DetailsComponent implements OnInit {
   edit() {
     this.router.navigate([`/recipes/${this.id}/edit/`])
   }
-
-
-
 }
