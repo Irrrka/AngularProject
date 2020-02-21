@@ -7,7 +7,7 @@
           <a class="nav-link" routerLink="/home">Home</a>
         </div>
           <div *ngIf="authService.checkIfLogged()" class="nav-item">
-            <a class="nav-link">Welcome, {{username}}!</a>
+            <a class="nav-link" routerLink="/profile">Welcome, {{username}}!</a>
           </div>
           <div *ngIf="authService.checkIfLogged()" class="nav-item">
             <a class="nav-link" routerLink="/share">Share recipe</a>

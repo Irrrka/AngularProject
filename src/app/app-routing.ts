@@ -9,12 +9,14 @@ import { HomeAuthenticatedComponent } from './components/home-authenticated/home
 import { DetailsComponent } from './components/recipe/details/details.component';
 import { CreateComponent } from './components/recipe/create/create.component';
 import { EditComponent } from './components/recipe/edit/edit.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeAuthenticatedComponent, canActivate: [AuthGuard] },
     { path: 'welcome', component: HomeComponent, },
     { path: 'login', component: LoginComponent, },
     { path: 'register', component: RegisterComponent, },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     { path: 'recipes/:id', component: DetailsComponent, canActivate: [AuthGuard]  },
     { path: 'recipes/:id/edit', component: EditComponent, canActivate: [AuthGuard]  },
     { path: 'share', component: CreateComponent, canActivate: [AuthGuard] },

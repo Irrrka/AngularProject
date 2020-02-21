@@ -11,6 +11,7 @@ const username = localStorage.getItem('username');
 let id;//check
 const getAllRecipesUrl = `https://baas.kinvey.com/appdata/${appKey}/recipes`;
 const getRecipeByIdUrl = `https://baas.kinvey.com/appdata/${appKey}/recipes/`;
+const getUserRecipesUrl = ` https://baas.kinvey.com/appdata/${appKey}/recipes?query={"_acl.creator":"${userId}"}`;
 
 @Injectable()
 export class RecipeService {
@@ -20,6 +21,11 @@ export class RecipeService {
 
     getAllRecipes(): Observable<RecipeModel[]> {
         return this.http.get<RecipeModel[]>(getAllRecipesUrl);
+    }
+
+    getUserRecipes(): Observable<RecipeModel[]>{
+        console.log(userId);
+        return this.http.get<RecipeModel[]>(getUserRecipesUrl);
     }
 
     getRecipe(id): Observable<RecipeModel> {
@@ -33,7 +39,6 @@ export class RecipeService {
     
     edit(id, model) {
         //console.log(id, model);
-        //https://baas.kinvey.com/appdata/app_id/recipes/recipe_id
         return this.http.put<RecipeModel>(getRecipeByIdUrl+id,model);
     }
 

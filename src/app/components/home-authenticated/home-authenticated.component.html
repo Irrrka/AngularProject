@@ -1,4 +1,4 @@
-<div id="sharedRecipes">
+<div id="sharedRecipes" *ngIf="(recipes$ | async).length !== 0">
     <div class="container">
         <div *ngFor="let recipe of (recipes$ | async)">
 
@@ -33,10 +33,10 @@
     </div>
 </div>
 </div>
-<!-- 
-<div *ngIf="recipes?.length === 0">
-    <div id='foodNotFound'>
-        <img src="https://t4.ftcdn.net/jpg/00/62/17/31/240_F_62173114_ozantkVtkPgzL0fxssAkTqKX1FHPr0UW.jpg" />
-        <h3>Food not found...</h3>
+
+<div *ngIf="(recipes$ | async).length === 0">
+        <div id='foodNotFound'>
+            <img src="../../../assets/images/noFood.jpg" />
+            <h3>Food not found...</h3>
+        </div>
     </div>
-</div> -->

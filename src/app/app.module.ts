@@ -20,6 +20,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CoreModule } from './components/core/core.module';
 import { DetailsComponent } from './components/recipe/details/details.component';
 import { RecipeModule } from './components/recipe/recipe.module';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { RecipeModule } from './components/recipe/recipe.module';
     FooterComponent,
     PageNotFoundComponent,
     HomeAuthenticatedComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
