@@ -28,22 +28,20 @@
     </div>
   
     <div class="col">
-      <div class="form-group">
+        <div class="form-group">
           <label for="prepMethod">Method of preparation</label>
-          <textarea type="text" id="defaultRecepieShareMethodOfPreparation" formControlName="prepMethod" class="form-control mb-4">
-            {{recipe.prepMethod}}
-          </textarea>
+        <textarea class="form-control" formControlName="prepMethod">{{recipe.prepMethod}}</textarea>
           <div *ngIf="f.prepMethod.touched && f.prepMethod.dirty">
-              <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.required">Field is required</div>
-              <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.minLength">Lenght must be atleast 10 characters</div>
+            <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.required">Field is required</div>
+            <div class="alert alert-danger" *ngIf="f.prepMethod.errors?.minLenght">Lenght must be atleast 10 characters</div>
           </div>
+        </div>
       </div>
-    </div>
     
     <div class="col">
       <div class="form-group">
           <label for="foodImageURL">Image</label>
-          <input type="text" id="defaultRecepieShareFoodImageURL" formControlName="foodImageURL" class="form-control mb-4" value={{recipe.foodImageURL}}>>
+          <input type="text" id="defaultRecepieShareFoodImageURL" formControlName="foodImageURL" class="form-control mb-4" value={{recipe.foodImageURL}}>
           <div *ngIf="f.foodImageURL.touched">
               <div class="alert alert-danger" *ngIf="f.foodImageURL.errors?.required">Field is required</div>
               <div class="alert alert-danger" *ngIf="f.foodImageURL.errors?.pattern">Please link a photo</div>

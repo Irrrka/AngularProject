@@ -25,6 +25,8 @@ export class EditComponent implements OnInit {
   editRecipeFailed: boolean;
   errMessage: string;
 
+  
+
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
@@ -41,43 +43,34 @@ export class EditComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.route.params.subscribe(data => {
-      this.id = data['id'];
-    });
-    
+    this.id = this.route.snapshot.params['id'];
+
     this.recipeService.getRecipe(this.id)
-    .subscribe(
-      data => {
-        //console.log(data);
-          this.recipe = data;
-        },
-        err => {
-          //console.log(err)
-        }
-      )
+      .subscribe(res=>{
+        this.recipe = res;
+      });
   }
 
   edit() {
-    console.log(this.form.value)
-    const {meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL } = this.form.value;
-    let data: RecipeModel;
-    data.meal = meal || this.recipe.meal;
-    data.ingredients = ingredients || this.recipe.ingredients;
-    data.prepMethod = prepMethod || this.recipe.prepMethod;
-    data.category = category || this.recipe.category;
-    data.categoryImageURL = categories[data.category];
-    console.log(data)
-    this.recipeService.edit(this.id, data)
-        .subscribe(
-          res => {
-            console.log(res)
-            //this.router.navigate(['/home'])
-          },
-          err => {
-            console.log(err)
-            //this.editRecipeFailed = true;
-            //this.errMessage = err['error']['description']
-          })
+    const recipeToEdit = {
+      _id: this.id,
+      meal: this.form.get('meal').value || this.recipe.meal,
+      ingredients: this.form.get('ingredients').value || this.recipe.ingredients,
+      prepMethod: this.form.get('prepMethod').value || this.recipe.prepMethod,
+      foodImageURL: this.form.get('foodImageURL').value || this.recipe.foodImageURL,
+      category: this.form.get('category').value || this.recipe.category,
+      categoryImageURL: this.recipe.categoryImageURL,
+    };
+
+    recipeToEdit.categoryImageURL = categories[recipeToEdit.category];
+
+    this.recipeService.edit(this.id, recipeToEdit)
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+      }, err => {
+        this.editRecipeFailed = true;
+        this.errMessage = err['error']['description'];
+      });
     }
 
   get f() {

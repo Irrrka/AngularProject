@@ -34,7 +34,7 @@ export class RecipeService {
     edit(id, model) {
         //console.log(id, model);
         //https://baas.kinvey.com/appdata/app_id/recipes/recipe_id
-        return this.http.put(getRecipeByIdUrl+id,model);
+        return this.http.put<RecipeModel>(getRecipeByIdUrl+id,model);
     }
 
     delete(id) {
