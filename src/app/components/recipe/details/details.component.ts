@@ -35,15 +35,16 @@ export class DetailsComponent implements OnInit {
       data => {
         //console.log(data)
           this.isCreator = this.creatorId === data['_acl']['creator'];
-          const { meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL} = data;
+         // const { meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL} = data;
           this.recipe = data;
+          //this.recipe['ingredients'] = ingredients.join(' ');
           //console.log(this.recipe)
         },
         err => {
           console.log(err)
         }
       );
-      //WHY ундефинед????
+      //WHY undefined????
       //console.log(this.recipe)
   }
 
@@ -62,5 +63,12 @@ export class DetailsComponent implements OnInit {
 
   edit() {
     this.router.navigate([`/recipes/${this.id}/edit/`])
+  }
+
+  like() {
+    this.recipe.likesCounter++;
+    this.recipeService.edit(this.id, this.recipe).subscribe(()=>{
+      this.router.navigate([`/recipes/${this.id}`]);
+    })
   }
 }

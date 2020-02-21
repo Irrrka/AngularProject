@@ -19,7 +19,10 @@
           <div *ngIf="isCreator" class="nav-item">
             <a class="btn btn-danger" (click)="archive()">Archive</a>
             <a class="btn btn-info" (click)="edit()">Edit</a>
+            <a class="btn btn-success"> {{recipe.likesCounter}} likes</a>
           </div>
-            <!-- <a class="btn btn-success" routerLink="/like/{{recipe._id}}"> {{recipe.likesCounter}} likes</a> -->
+          <div *ngIf="!isCreator" class="nav-item">
+            <a class="btn btn-success" (click)="like()"> {{recipe.likesCounter}} likes</a>
+          </div>
         </div>
   </div>

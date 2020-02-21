@@ -60,6 +60,7 @@ export class EditComponent implements OnInit {
       foodImageURL: this.form.get('foodImageURL').value || this.recipe.foodImageURL,
       category: this.form.get('category').value || this.recipe.category,
       categoryImageURL: this.recipe.categoryImageURL,
+      likesCounter: this.recipe.likesCounter,
     };
 
     recipeToEdit.categoryImageURL = categories[recipeToEdit.category];
@@ -75,9 +76,5 @@ export class EditComponent implements OnInit {
 
   get f() {
     return this.form.controls;
-  }
-
-  get invalid() {
-    return this.form.invalid;
   }
 }

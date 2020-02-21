@@ -40,22 +40,24 @@ export class CreateComponent implements OnInit {
       "category": ['', [Validators.required]],
       "categoryImageURL": ['', [Validators.nullValidator]],
     });
-    console.log(this.form)
+    //console.log(this.form)
   }
 
   share() {
     //console.log(this.form.controls)
-    const {meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL } = this.form.value;
+    const {meal, ingredients, prepMethod, foodImageURL, category, categoryImageURL, likesCounter } = this.form.value;
     let data = {
       meal,
       ingredients: ingredients.split(' '),
       prepMethod,
       foodImageURL,
       category,
-      categoryImageURL
+      categoryImageURL,
+      likesCounter,
     }
 
     data.categoryImageURL = categories[category];
+    data.likesCounter = 0;
 
     this.recipeService.create(data)
       .subscribe(
